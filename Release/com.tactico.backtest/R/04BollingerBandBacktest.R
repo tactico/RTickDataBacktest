@@ -109,7 +109,7 @@ setMethod(f="Evaluate",
               return (Obj)
             }
 
-            if(Volume(Obj@bar) <= 0  || Close(Obj@bar) <= 0){#Ticks with zero volume or price? Skip
+            if(Volume(Obj@bar) <= 0  || Close(Obj@bar) <= 0){#Ticks with zero volume or price? Skip. 
               print(paste("Skipped:",ToString(Obj@bar)))
               return(Obj)
             }
@@ -206,7 +206,7 @@ setMethod(f="Finalize",
           signature="BollingerBandBacktest",
           definition=function(Obj){
             #Obj@position <- Trade(Obj@position, Timestamp(Obj@bar), -1L * GetPositionSize(Obj@position), Close(Obj@bar))
-            print( paste("date: ", Obj@equity.time[[1]][length(Obj@equity.time)]," PnL: ", Obj@equity.value[[1]][length(Obj@equity.value)]))
+            print( paste("date: ", Obj@equity.time[length(Obj@equity.time)]," PnL: ", Obj@equity.value[length(Obj@equity.value)]))
             print( paste("pnl: ", GetRealized(Obj@position) + GetUnrealized(Obj@position)))
             return (Obj)
           })
