@@ -1,6 +1,7 @@
 # This show how to make a backtester for tick data using the framework
 # 
 # Begin by loading the libraries and source code
+# to install rJava run command install.package("rJava")
 library("rJava")
 
 sourceDir <- function(path, trace = TRUE, ...) {
