@@ -1,8 +1,10 @@
 # This show how to make a backtester for tick data using the framework
 # 
 # Begin by loading the libraries and source code
+# to install rJava run command install.package("rJava")
 library("rJava")
 
+setwd("THE DIRECTORY CONTAINING THIS FILE")
 sourceDir <- function(path, trace = TRUE, ...) {
   for (nm in list.files(path, pattern = "\\.[RrSsQq]$")) {
     if(trace) cat(nm,":")           
