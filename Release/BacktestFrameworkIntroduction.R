@@ -19,21 +19,28 @@ password <- ""
 #Bollinger Band Backtest is defined in  com.tactico.backtest/R/04BollingerBandBacktest.R
 #Read there how to define your own strategy (Specifically the Evaluate method)
 
+
+
 #Variables that the BB backtest needs (defined better in the source):
 symbol <- "BAC:US"
 start.date <- "01/03/2014"
 end.date <- "01/03/2015"
 granularity <- 15L #Minutes between ticks
 period <- 20L#Number of day of history required to makes decisions at every bar
-entry.thres <- 2L
-exit.thres <- 1L
+entry.thres <- 2
+exit.thres <- 1
 timeout <- 300L#After granularity*timeout minutes close positions if no signal
 entry.mode <- TRUE#defined in source
 shares <- 1000L#Shares to trade with
 
 
+
+
 bollinger.band.backtest <- new("BollingerBandBacktest", symbol, start.date, end.date, granularity, period,
                                entry.thres , exit.thres, timeout, entry.mode, shares, username, password)
 
+Rprof(line.profiling = TRUE)
 bollinger.band.backtest <- Start(bollinger.band.backtest)
+Rprof(NULL)
+summaryRprof(lines='show')
 
