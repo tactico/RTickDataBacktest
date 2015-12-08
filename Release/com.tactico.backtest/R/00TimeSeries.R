@@ -112,6 +112,7 @@ setMethod("initialize", "fileBuffer", function(.Object, filename,linesPerBuffer)
   .Object@filename <- as.character(filename)#connection name
   .Object@fullLines <- Queue(as.integer(linesPerBuffer))
   .Object@lines.per.buffer <- as.integer(linesPerBuffer)
+  .Object@env$con <- file(filename,"rb")
   return(.Object)
 })
 
@@ -119,7 +120,7 @@ setGeneric(name="loadNextBuffer",def=function(Obj){standardGeneric("loadNextBuff
 setMethod(f="loadNextBuffer", signature="fileBuffer", definition=function(Obj){
   #read lines without loading all file into memory
 
-  con <- file(Obj@filename,"rb")#open binary
+  con <-  Obj@env$con    #file(Obj@filename,"rb")#open binary
   seek(con,as.integer(Obj@env$pos))#To last position of read line (0 indexed)
   if(Obj@env$pos == 0L){
     lines <- readLines(con,n=Obj@lines.per.buffer+1)
@@ -131,9 +132,10 @@ setMethod(f="loadNextBuffer", signature="fileBuffer", definition=function(Obj){
   Obj@env$pos <- as.integer(seek(con,where=0L,origin='current'))#new position (possibly EOF)
   if (length(lines) < Obj@lines.per.buffer){#finished file
     Obj@env$eof <- TRUE
+    close(con)
   }
   Obj@env$startIndex <- Obj@lines.per.buffer - length(lines) + 1L
-  close(con)
+  #close(con)
 })
 
 setGeneric(name="isEof",def=function(Obj){standardGeneric("isEof")})       

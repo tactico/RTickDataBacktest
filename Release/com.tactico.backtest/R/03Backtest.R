@@ -342,14 +342,14 @@ setMethod(f="Start",
               }
               if (inSession(Obj,Obj@cur.date)){
                 Obj <- Evaluate(Obj)#If inside trading day then do strategy.
-                Obj <- recordEquity(Obj,Obj@cur.date)
+                #Obj <- recordEquity(Obj,Obj@cur.date)
               }
               Obj@cur.date <- syncTimeStep(Obj)
             }
             Obj <- Finalize(Obj)
             Obj@time.finalized <- as.POSIXlt(Sys.time())
             print(paste("Started:",Obj@time.started," Finished:",Obj@time.finalized))
-            plotEquity(Obj)
+            #plotEquity(Obj)
             return(Obj)
           })
 

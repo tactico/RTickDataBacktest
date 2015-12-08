@@ -4,7 +4,7 @@
 # to install rJava run command install.package("rJava")
 library("rJava")
 
-setwd("THE DIRECTORY CONTAINING THIS FILE")
+
 sourceDir <- function(path, trace = TRUE, ...) {
   for (nm in list.files(path, pattern = "\\.[RrSsQq]$")) {
     if(trace) cat(nm,":")           
@@ -12,7 +12,11 @@ sourceDir <- function(path, trace = TRUE, ...) {
     if(trace) cat("\n")
   }
 }
-sourceDir('com.tactico.backtest/R/')
+# For debugging, sometimes useful to source directory instead of calling library which require reinitializing of R
+#setwd("THE DIRECTORY CONTAINING THIS FILE")
+#sourceDir('com.tactico.backtest/R/')
+
+library(com.tactico.backtest)
 
 #Fill in:
 username <- ""

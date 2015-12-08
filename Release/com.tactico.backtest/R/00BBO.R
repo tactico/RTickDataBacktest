@@ -8,21 +8,21 @@ BBO <- setClass(
   "BBO",
 
   slots = c(
-    my.exchange = "character",
-    my.bid.price = "numeric",
-    my.ask.price = "numeric",
-    my.bid.size = "integer",
-    my.ask.size = "integer"
+    exchange = "character",
+    bid.price = "numeric",
+    ask.price = "numeric",
+    bid.size = "integer",
+    ask.size = "integer"
   ),
 
   prototype = list(
-    my.bid.price = 0.0,
-    my.ask.price = 99999.9,
-    my.bid.size = 0L,
-    my.ask.size = 0L
+    bid.price = 0.0,
+    ask.price = 99999.9,
+    bid.size = 0L,
+    ask.size = 0L
   ))
 setMethod("initialize", "BBO", function(.Object, exchange){
-  .Object@my.exchange <- exchange
+  .Object@exchange <- exchange
   return(.Object)
 })
 
@@ -40,10 +40,10 @@ setGeneric(name="SetBBO", def=function(Obj, bid.price, ask.price, bid.size, ask.
 setMethod(f="SetBBO",
           signature="BBO",
           definition=function(Obj, bid.price, ask.price, bid.size, ask.size){
-            Obj@my.bid.price <- bid.price
-            Obj@my.ask.price <- ask.price
-            Obj@my.bid.size <- bid.size
-            Obj@my.ask.size <- ask.size
+            Obj@bid.price <- bid.price
+            Obj@ask.price <- ask.price
+            Obj@bid.size <- bid.size
+            Obj@ask.size <- ask.size
             return (Obj)
           })
 
